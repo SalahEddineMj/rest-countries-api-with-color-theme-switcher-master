@@ -1,0 +1,467 @@
+/*-----------------------------------*\
+  #CUSTOM PROPERTY
+\*-----------------------------------*/
+:root {
+  --background-light: hsl(0, 0%, 98%);
+  --on-background-light: hsl(200, 15%, 8%);
+  --surface-light: hsl(0, 0%, 100%);
+  --background-dark: hsl(207, 26%, 17%);
+  --on-background-dark: hsl(0, 0%, 100%);
+  --surface-dark: hsl(209, 23%, 22%);
+  --on-surface-light: hsl(0, 0%, 52%);
+  --on-surface-dark: hsl(0, 0%, 100%);
+  --surface-variant-light: hsla(209, 26%, 17%, 0.184);
+  --surface-variant-dark: hsla(0, 0%, 98%, 0.39);
+  --font-family: "Nunito Sans", sans-serif;
+  --fs-base: 62.5%;
+  --fs-body-medium: 1.4rem;
+  --lh-base: 20px;
+
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: var(--background-dark);
+  --on-background: var(--on-background-dark);
+  --surface: var(--surface-dark);
+  --on-surface: var(--on-surface-dark);
+  --surface-variant: var(--surface-variant-dark);
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --background: var(--background-light);
+  --on-background: var(--on-background-light);
+  --surface: var(--surface-light);
+  --on-surface: var(--on-surface-light);
+  --surface-variant: var(--surface-variant-light);
+}
+/*-----------------------------------*\
+  #RESET
+\*-----------------------------------*/
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li { list-style: none; }
+a,
+img,
+span,
+input,
+button { display: block; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img { height: auto; }
+input,
+button {
+  border: none;
+  background: none;
+  font: inherit
+}
+input {
+  width: 100%;
+  outline: none;
+}
+button { cursor: pointer; }
+/*-----------------------------------*\
+  #BASE
+\*-----------------------------------*/
+html {
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  background-color: var(--background);
+  color: var(--on-background);
+  font-size: var(--fs-body-medium);
+  line-height: var(--lh-base);
+  min-height: 100vh;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: var(--surface);
+}
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+.material-symbols-rounded {
+  width: 1em;
+  height: 1em;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+/*-----------------------------------*\
+  #COMPONENTS
+\*-----------------------------------*/
+:has(> .state-layer) {
+  position: relative;
+  user-select: none;
+  isolation: isolate;
+  overflow: hidden;
+  --state-layer-bg: var(--surface-variant);
+}
+.state-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--state-layer-bg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+:has(> .state-layer):hover .state-layer {
+  opacity: 0.3;
+} 
+:has(> .state-layer):where(:hover, :focus) .state-layer {
+  opacity: 0.4;
+} 
+:has(> .state-layer):active .state-layer {
+  opacity: 0.6;
+} 
+.card {
+  border-radius: 8px;
+  background-color: var(--surface);
+  overflow: hidden;
+  box-shadow:#0000000b 0px 8px 24px;
+  margin-inline: auto;
+  cursor: pointer;
+}
+.card .card-content {
+  padding-inline: 20px;
+  padding-block: 30px;
+}
+.card .card-content .card-title { line-height: 1.5; }
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card .card-details {
+  margin-block-start: 20px;
+  display: grid;
+  gap: 8px;
+}
+.card .card-content .card-details .item {
+  font-size: 14px;
+  font-weight: normal;
+}
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 8;
+  height: 72px;
+  background-color: var(--surface);
+  box-shadow:#0000000b 0px 8px 24px;
+}
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+[data-theme="light"] .theme-btn :where(.light-icon, .light-text),
+.theme-btn :where(.dark-icon, .dark-text) { display: none; }
+[data-theme="light"] .theme-btn :where(.dark-icon, .dark-text) { display: block; }
+.header .theme-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+}
+.header .theme-btn .text {
+  font-weight: 600;
+}
+/*-----------------------------------*\
+  #FILTER SECTION
+\*-----------------------------------*/
+.filter-section {
+  padding-block-start: 102px;
+}
+.filter-section .container {
+  display: flex;
+  flex-direction: column;
+  column-gap: 50px;
+}
+.filter-section .search-wrapper {
+  background-color: var(--surface);
+  box-shadow: #0000000b 0px 4px 20px;
+  border-radius: 8px;
+  position: relative;
+  height: 56px;
+  margin-block-end: 40px;
+}
+.filter-section .search-wrapper .input-field {
+  padding-inline-start: 90px;
+  height: 100%;
+  color: var(--on-surface);
+}
+.filter-section .search-wrapper .input-field::placeholder {
+  color: currentColor;
+}
+.filter-section .search-wrapper .input-field::-webkit-search-cancel-button { display: none; }
+.filter-section .search-wrapper .search-btn {
+  position: absolute;
+  top: 50%;
+  translate: 30px -50%;
+  color: var(--on-surface);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.filter-section .filter-nav {
+  width: 230px;
+  position: relative;
+  margin-block-end: 50px;
+}
+.filter-section .continents-list-title {
+  height: 56px;
+  border-radius: 8px;
+  background-color: var(--surface);
+  box-shadow: #0000000b 0px 4px 20px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  }
+.filter-section .continents-list-title .arrow-icon {
+  font-size: 17px;
+  font-weight: 600;
+}
+.filter-section .continents-list {
+  display: grid;
+  gap: 2px;
+  position: absolute;
+  width: 100%;
+  top: 61px;
+  background-color: var(--surface);
+  border-radius: 8px;
+  padding-inline: 20px;
+  box-shadow: #0000000b 0px 4px 20px;
+  padding-block: 12px;
+  z-index: 4;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.3s ease-in-out;
+}
+.filter-section .continents-list.active {
+  clip-path: inset(0 0 0 0);
+}
+.filter-section .continents-list-title .arrow-icon {
+  transform: rotate(180deg);
+  transition: 0.3s linear;
+}
+.filter-section .continents-list-title.active .arrow-icon {
+  transform: rotate(0deg);
+}
+.filter-section .continents-list .list-link {
+  font-weight: 600;
+  padding-block: 5px;
+  border-radius: 4px;
+  padding-inline-start: 8px;
+}
+/*-----------------------------------*\
+  #COUNTRIES SECTION
+\*-----------------------------------*/
+.countries-section {
+  padding-block-end: 80px;
+}
+.countries-section .countries-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 50px;
+}
+.empty-countries {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 65%;
+  left: 50%;
+  translate: -50% -50%;
+  overflow: hidden;
+}
+.empty-countries .img-cover {
+  max-width: 400px;
+  margin-inline: auto;
+}
+/*-----------------------------------*\
+  #MODAL
+\*-----------------------------------*/
+.modal {
+  background-color: var(--background);
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  top: 72px;
+  animation: modal-open 300ms ease-out forwards;
+  padding-block-end: 50px;
+  overflow-y: auto;
+}
+@keyframes modal-open {
+  0% { 
+    scale: 0.7;
+    opacity: 0.5;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000000;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 6;
+  animation: fade-overlay 300ms ease-in-out forwards;
+  pointer-events: none;
+}
+.overflow-none {
+  overflow: hidden;
+}
+@keyframes fade-overlay {
+  0% {
+    opacity: 0;
+    visibility: 0;
+  }
+  100% {
+    opacity: 0.5;
+    visibility: visible;
+  }
+}
+.modal .back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: var(--surface);
+  padding-block: 5px;
+  width: 100px;
+  border-radius: 4px;
+  box-shadow: #0000000b 0px 4px 20px;
+  margin-block: 25px 40px;
+}
+.modal .modal-banner {
+  height: 200px;
+}
+.modal .modal-content .details-list-title {
+  margin-block: 35px 25px;
+}
+.modal .modal-content .details-list {
+  display: grid;
+  gap: 10px;
+}
+.modal .modal-content .details-list .item:nth-child(5) {
+  margin-block-end: 48px;
+}
+.modal .modal-content .border-countries {
+  margin-block-start: 35px;
+}
+.modal .modal-content .border-countries-list-title {
+  margin-block-end: 20px;
+}
+.modal .modal-content .border-countries-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal .modal-content .border-countries-list .list-link {
+  background-color: var(--surface);
+  padding-block: 5px;
+  border-radius: 4px;
+  box-shadow: #0000000b 0px 4px 20px;
+  width: 100px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 950px;
+  }
+  .modal .modal-content .details-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px
+  }
+  .modal .modal-content .details-list .item:nth-child(5) {
+    margin-block-end: 0;
+  }
+  .filter-section .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .filter-section .container {
+    margin-block-end: 48px;
+  }
+  .filter-section .container :where(.search-wrapper, .filter-nav) {
+    margin-block-end: 0;
+  }
+  .filter-section .search-wrapper .input-field {
+    width: 400px
+  }
+  .modal .main {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    align-items: center;
+    gap: 80px
+  }
+  .modal .modal-banner {
+    height: 100%;
+  }
+  .modal .modal-content .border-countries {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  .modal .modal-content .border-countries-list-title { margin: 0 ; }
+}
+.modal .modal-content .border-countries-list {
+  gap: 12px;
+}
+/* @media (min-width: 1200px) {
+  .container {
+    max-width: 1170px;
+  }
+} */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1460px;
+  }
+}
