@@ -44,7 +44,7 @@ navItems.forEach(function (item) {
 
 
 async function fetchRandomCountries() {
-  let response = await fetch("/data.json");
+  let response = await fetch("data.json");
   let data = await response.json();
   data.forEach(function(item) {
     Card(item);
@@ -53,7 +53,7 @@ async function fetchRandomCountries() {
 fetchRandomCountries()
 
 async function fetchRegions(name) {
-  let response = await fetch("/data.json");
+  let response = await fetch("data.json");
   let data = await response.json();
   let result = data.filter((el) => el.region == name);
   countriesList.innerHTML = '';
@@ -76,7 +76,7 @@ searchBtn.addEventListener("click", function () {
 });
 
 async function fetchCountries(country) {
-  let response = await fetch("/data.json");
+  let response = await fetch("data.json");
   let data = await response.json();
   let result = data.filter((el) => el.name == country);
   if(result.length) {
@@ -213,7 +213,7 @@ const Modal = function(countryName , countryFlag, capital, nativeName, region, s
 
 
 async function fetchBorderCountry(countryName) {
-  let response = await fetch('/data.json');
+  let response = await fetch('data.json');
   let data = await response.json();
   let result = data.filter((item) => item.alpha3Code == countryName);
   let [ { name, population, region, capital, flags: { svg }, nativeName, subregion, topLevelDomain: [tld], currencies, languages, borders } ] = result;
@@ -224,7 +224,7 @@ async function fetchBorderCountry(countryName) {
 }
 
 // async function borderCountriesNames(border) {
-//   let response = await fetch("/data.json");
+//   let response = await fetch("data.json");
 //   let data = await response.json();
 //   let result = data.filter((item) => item.alpha3Code == border)
 //   let [ { name } ] = result;
